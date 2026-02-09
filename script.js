@@ -13,11 +13,11 @@ const bgMusic = document.getElementById("bgMusic");
 
 // Slideshow data (add more, change captions!)
 const slides = [
-  { src: "images/img1.jpg", caption: "Our first date ☕" },
-  { src: "images/img2.jpg", caption: "That sunset we never forgot 🌅" },
-  { src: "images/img3.jpg", caption: "Laughing till we cried 😂" },
-  { src: "images/img4.jpg", caption: "Just us, forever ❤️" },
-  { src: "images/img5.jpg", caption: "My favorite place — your arms" }
+  { src: "images/img1.jpeg", caption: "Our first date ☕" },
+  { src: "images/img2.jpeg", caption: "That sunset we never forgot 🌅" },
+  { src: "images/img3.jpeg", caption: "Laughing till we cried 😂" },
+  { src: "images/img4.jpeg", caption: "Just us, forever ❤️" },
+  { src: "images/img5.jpeg", caption: "My favorite place — your arms" }
 ];
 
 let slideIndex = 0;
