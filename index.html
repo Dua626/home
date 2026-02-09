@@ -1,42 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For You 🤍</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You, My Love 🤍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<audio id="bgMusic" src="music/thousand_years.mp3" loop></audio>
+  <audio id="bgMusic" src="music/thousand_years.mp3" loop></audio>
 
-<div class="hearts"></div>
+  <div class="hearts"></div>
 
-<!-- Question Screen -->
-<section id="question" class="screen active">
-  <h1>Do you love me? ❤️</h1>
-  <div class="buttons">
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
-  </div>
-</section>
+  <!-- Welcome -->
+  <section id="welcome" class="screen active">
+    <div class="content">
+      <h1>My dearest [Their Name] ❤️</h1>
+      <p class="note">I made this little corner of the internet just for you.<br>Every click is a kiss from me.</p>
+      <button id="startBtn" class="big-btn">Open with love</button>
+    </div>
+  </section>
 
-<!-- Memories -->
-<section id="memories" class="screen">
-  <div class="slideshow">
-    <img id="slideImg" src="images/img1.jpg" alt="">
-  </div>
+  <!-- Question -->
+  <section id="question" class="screen">
+    <div class="content">
+      <h1>Do you love me? ❤️</h1>
+      <p class="sub">Be honest… I can take it 😉</p>
+      <div class="buttons">
+        <button id="yesBtn" class="yes">Yes, forever</button>
+        <button id="noBtn" class="no">No</button>
+      </div>
+    </div>
+  </section>
 
-  <video id="memoryVideo" controls>
-    <source src="video/memory.mp4" type="video/mp4">
-  </video>
+  <!-- Memories -->
+  <section id="memories" class="screen">
+    <div class="content">
+      <h1>Our memories ✨</h1>
+      
+      <div class="slideshow">
+        <img id="slideImg" src="images/img1.jpg" alt="">
+        <div id="caption" class="caption"></div>
+      </div>
 
-  <div class="letter">
-    <!-- YOU will write this -->
-    <p>Your letter goes here 🤍</p>
-  </div>
-</section>
+      <video id="memoryVideo" controls>
+        <source src="video/memory.mp4" type="video/mp4">
+      </video>
 
-<script src="script.js"></script>
+      <button id="letterBtn" class="big-btn">Now read the letter I wrote for you ❤️</button>
+    </div>
+  </section>
+
+  <!-- Letter -->
+  <section id="letter" class="screen">
+    <div class="content letter-content">
+      <h1>My love,</h1>
+      <div class="letter-text">
+        <!-- ←←← REPLACE THIS WHOLE BLOCK WITH YOUR OWN LETTER -->
+        <p>Every single day with you feels like the best chapter of my life. Thank you for every laugh, every late-night talk, every hug that makes the world disappear.</p>
+        <p>You are my home, my safe place, my biggest adventure. I can’t wait to make a thousand more memories with you.</p>
+        <p>Forever yours,<br><span class="signature">[Your Name]</span></p>
+      </div>
+      <button onclick="restart()" class="big-btn">Back to the beginning ❤️</button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>
