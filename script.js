@@ -2,119 +2,178 @@ const screens = {
   welcome: document.getElementById("welcome"),
   question: document.getElementById("question"),
   memories: document.getElementById("memories"),
-  letter: document.getElementById("letter")
+  happyLetter: document.getElementById("happyLetter"),
+  sadLetter: document.getElementById("sadLetter")
 };
 
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const startBtn = document.getElementById("startBtn");
-const letterBtn = document.getElementById("letterBtn");
 const bgMusic = document.getElementById("bgMusic");
-
-// Slideshow data (add more, change captions!)
-const slides = [
-  { src: "images/img1.jpeg", caption: "Our first date ☕" },
-  { src: "images/img2.jpeg", caption: "That sunset we never forgot 🌅" },
-  { src: "images/img3.jpeg", caption: "Laughing till we cried 😂" },
-  { src: "images/img4.jpeg", caption: "Just us, forever ❤️" },
-  { src: "images/img5.jpeg", caption: "My favorite place — your arms" }
-];
-
-let slideIndex = 0;
+const mainHeart = document.getElementById("mainHeart");
+const sadMessage = document.getElementById("sadMessage");
+const maybeBtn = document.getElementById("maybeBtn");
+const yesBtn = document.getElementById("yesBtn");
+const startBtn = document.getElementById("startBtn");
 const slideImg = document.getElementById("slideImg");
 const captionEl = document.getElementById("caption");
+const video = document.getElementById("memoryVideo");
+const happyTextEl = document.getElementById("happyLetterText");
+const sadTextEl = document.getElementById("sadLetterText");
 
-// Switch screen
-function showScreen(screenName) {
+// ── Content you can edit ──
+const slides = [
+  { src: "images/img1.jpeg", caption: "The day we met" },
+  { src: "images/img2.jpeg", caption: "Our first adventure" },
+  { src: "images/img3.jpeg", caption: "When you smiled at me" },
+  { src: "images/img4.jpeg", caption: "My favorite moment" },
+  { src: "images/img5.jpeg", caption: "You make everything better" }
+];
+
+const happyLetterContent = `
+I still remember the first time I saw you...  
+My heart knew something beautiful had just entered my life.
+
+Every laugh, every hug, every quiet moment with you  
+has become the best parts of my days.
+
+You are my safe place, my biggest joy, my favorite person.  
+I choose you, every single day.
+
+Forever yours,  
+[Your Name] ❤️
+`.trim();
+
+const sadLetterContent = `
+Okay... "maybe" ten times... 😔
+
+Each time you clicked maybe, I felt another little crack in my heart.  
+I was really hoping for a "yes", but I guess maybe is better than no...
+
+Still love you though.  
+Even when you're unsure, I'm sure about you.
+
+With a slightly cracked but still beating heart,  
+[Your Name] 💔→❤️
+`.trim();
+
+// ── Helpers ──
+function showScreen(name) {
   Object.values(screens).forEach(s => s.classList.remove("active"));
-  screens[screenName].classList.add("active");
+  screens[name].classList.add("active");
 }
 
-// Floating hearts everywhere
+function typeWriter(text, element, speed = 45) {
+  element.innerHTML = "";
+  let i = 0;
+  const interval = setInterval(() => {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      element.scrollTop = element.scrollHeight;
+    } else {
+      clearInterval(interval);
+    }
+  }, speed);
+}
+
 function createHeart() {
   const heart = document.createElement("span");
-  heart.textContent = ["❤", "💕", "💗", "💖"][Math.floor(Math.random()*4)];
+  heart.textContent = "❤️";
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 20 + 18 + "px";
+  heart.style.fontSize = Math.random() * 22 + 18 + "px";
   heart.style.animationDuration = Math.random() * 6 + 7 + "s";
   document.querySelector(".hearts").appendChild(heart);
   setTimeout(() => heart.remove(), 15000);
 }
-setInterval(createHeart, 400);
+setInterval(createHeart, 500);
 
-// Burst of hearts when clicking Yes
-function burstHearts() {
-  for (let i = 0; i < 30; i++) {
+// ── Maybe button logic ──
+let maybeCount = 0;
+const MAX_MAYBE = 10;
+
+function moveMaybeButton() {
+  const maxX = window.innerWidth - maybeBtn.offsetWidth - 50;
+  const maxY = window.innerHeight - maybeBtn.offsetHeight - 50;
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+  maybeBtn.style.position = "fixed";
+  maybeBtn.style.left = x + "px";
+  maybeBtn.style.top = y + "px";
+}
+
+// Click (phone) + hover (desktop)
+maybeBtn.addEventListener("click", handleMaybeClick);
+maybeBtn.addEventListener("mouseenter", moveMaybeButton);
+
+function handleMaybeClick() {
+  maybeCount++;
+  moveMaybeButton();
+
+  if (maybeCount <= MAX_MAYBE) {
+    mainHeart.className = `main-heart broken-${maybeCount}`;
+  }
+
+  if (maybeCount >= MAX_MAYBE) {
+    sadMessage.classList.add("visible");
+
     setTimeout(() => {
-      const h = document.createElement("span");
-      h.textContent = "❤";
-      h.style.left = Math.random() * 100 + "vw";
-      h.style.bottom = "-20px";
-      h.style.fontSize = "40px";
-      h.style.animation = "float 3s linear forwards";
-      document.querySelector(".hearts").appendChild(h);
-      setTimeout(() => h.remove(), 3000);
-    }, i * 50);
+      showScreen("sadLetter");
+      typeWriter(sadLetterContent, sadTextEl, 50);
+    }, 1600);
   }
 }
 
-// No button runs away (better version)
-noBtn.addEventListener("mouseover", () => {
-  const maxX = window.innerWidth - noBtn.offsetWidth - 50;
-  const maxY = window.innerHeight - noBtn.offsetHeight - 50;
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-  noBtn.style.position = "fixed";
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-});
-
-// Start button
-startBtn.addEventListener("click", () => {
-  showScreen("question");
-  bgMusic.volume = 0.5;
-  bgMusic.play();
-});
-
-// Yes → memories
+// ── Yes path ──
 yesBtn.addEventListener("click", () => {
   showScreen("memories");
-  burstHearts();
+  bgMusic.volume = 0.45;
+  bgMusic.play().catch(() => {});
   startSlideshow();
 });
 
-// Letter button
-letterBtn.addEventListener("click", () => {
-  showScreen("letter");
-});
+// ── Slideshow + video sequence ──
+let slideIndex = 0;
+let slideshowTimer;
 
-// Slideshow
 function startSlideshow() {
-  let i = 0;
+  slideImg.parentElement.style.display = "block";
+  video.style.display = "none";
+
   function next() {
     slideImg.style.opacity = 0;
     setTimeout(() => {
-      i = (i + 1) % slides.length;
-      slideImg.src = slides[i].src;
-      captionEl.textContent = slides[i].caption;
-      captionEl.style.opacity = 1;
+      slideImg.src = slides[slideIndex].src;
+      captionEl.textContent = slides[slideIndex].caption;
       slideImg.style.opacity = 1;
+
+      slideIndex++;
+      if (slideIndex >= slides.length) {
+        clearInterval(slideshowTimer);
+        setTimeout(() => {
+          slideImg.parentElement.style.display = "none";
+          video.style.display = "block";
+          video.play();
+        }, 2800);
+      }
     }, 600);
   }
+
   next();
-  setInterval(next, 4500);
+  slideshowTimer = setInterval(next, 3800);
 }
 
-// Restart
-function restart() {
-  showScreen("welcome");
-  bgMusic.pause();
-  bgMusic.currentTime = 0;
-}
-
-// Keyboard fun (press Y for yes)
-document.addEventListener("keydown", e => {
-  if (e.key.toLowerCase() === "y" && screens.question.classList.contains("active")) {
-    yesBtn.click();
-  }
+video.addEventListener("ended", () => {
+  setTimeout(() => {
+    showScreen("happyLetter");
+    typeWriter(happyLetterContent, happyTextEl, 45);
+  }, 1200);
 });
+
+// ── Start button ──
+startBtn.addEventListener("click", () => {
+  showScreen("question");
+  bgMusic.volume = 0.4;
+  bgMusic.play().catch(() => {});
+});
+
+// ── Restart buttons ──
+document.getElementById("restartHappy").addEventListener("click", () => location.reload());
+document.getElementById("restartSad").addEventListener("click", () => location.reload());

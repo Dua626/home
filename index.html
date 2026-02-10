@@ -1,71 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For You, My Love 🤍</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You 🤍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <audio id="bgMusic" src="music/thousand_years.mp3" loop></audio>
+<audio id="bgMusic" src="music/thousand_years.mp3" loop></audio>
+<div class="hearts"></div>
 
-  <div class="hearts"></div>
+<!-- Welcome -->
+<section id="welcome" class="screen active">
+  <div class="content">
+    <h1>My Love ❤️</h1>
+    <p>A little surprise made just for you...</p>
+    <button id="startBtn">Open with love</button>
+  </div>
+</section>
 
-  <!-- Welcome -->
-  <section id="welcome" class="screen active">
-    <div class="content">
-      <h1>My dearest [Their Name] ❤️</h1>
-      <p class="note">I made this little corner of the internet just for you.<br>Every click is a kiss from me.</p>
-      <button id="startBtn" class="big-btn">Open with love</button>
+<!-- Question -->
+<section id="question" class="screen">
+  <div class="content">
+    <h1>Do you love me? 🥺</h1>
+    
+    <div class="heart-container">
+      <span id="mainHeart" class="main-heart">❤️</span>
     </div>
-  </section>
 
-  <!-- Question -->
-  <section id="question" class="screen">
-    <div class="content">
-      <h1>Do you love me? ❤️</h1>
-      <p class="sub">Be honest… I can take it 😉</p>
-      <div class="buttons">
-        <button id="yesBtn" class="yes">Yes, forever</button>
-        <button id="noBtn" class="no">No</button>
-      </div>
+    <div class="buttons">
+      <button id="yesBtn">Yes!! 💕</button>
+      <button id="maybeBtn">Maybe... 🤔</button>
     </div>
-  </section>
 
-  <!-- Memories -->
-  <section id="memories" class="screen">
-    <div class="content">
-      <h1>Our memories ✨</h1>
-      
-      <div class="slideshow">
+    <div id="sadMessage" class="sad-message">Fine 😔💔</div>
+  </div>
+</section>
+
+<!-- Memories -->
+<section id="memories" class="screen">
+  <div class="content">
+    <h1>Our Moments 💞</h1>
+    
+    <div class="slideshow-container">
+      <div class="slide-frame">
         <img id="slideImg" src="images/img1.jpeg" alt="">
-        <div id="caption" class="caption"></div>
       </div>
-
-      <video id="memoryVideo" controls>
-        <source src="video/memory.mp4" type="video/mp4">
-      </video>
-
-      <button id="letterBtn" class="big-btn">Now read the letter I wrote for you ❤️</button>
+      <div id="caption" class="caption"></div>
     </div>
-  </section>
 
-  <!-- Letter -->
-  <section id="letter" class="screen">
-    <div class="content letter-content">
-      <h1>My love,</h1>
-      <div class="letter-text">
-        <!-- ←←← REPLACE THIS WHOLE BLOCK WITH YOUR OWN LETTER -->
-        <p>Every single day with you feels like the best chapter of my life. Thank you for every laugh, every late-night talk, every hug that makes the world disappear.</p>
-        <p>You are my home, my safe place, my biggest adventure. I can’t wait to make a thousand more memories with you.</p>
-        <p>Forever yours,<br><span class="signature">[Your Name]</span></p>
-      </div>
-      <button onclick="restart()" class="big-btn">Back to the beginning ❤️</button>
-    </div>
-  </section>
+    <video id="memoryVideo" controls playsinline>
+      <source src="video/memory.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- Happy Letter -->
+<section id="happyLetter" class="screen">
+  <div class="content letter-content">
+    <h1>My dearest ❤️</h1>
+    <div id="happyLetterText" class="letter-text"></div>
+    <button id="restartHappy">Read again</button>
+  </div>
+</section>
+
+<!-- Sad Letter -->
+<section id="sadLetter" class="screen">
+  <div class="content letter-content">
+    <h1>Okay... 😔</h1>
+    <div id="sadLetterText" class="letter-text"></div>
+    <button id="restartSad">Try again?</button>
+  </div>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
