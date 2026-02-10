@@ -11,12 +11,14 @@ const mainHeart = document.getElementById("mainHeart");
 const sadMessage = document.getElementById("sadMessage");
 const maybeBtn = document.getElementById("maybeBtn");
 const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
 const startBtn = document.getElementById("startBtn");
 const slideImg = document.getElementById("slideImg");
 const captionEl = document.getElementById("caption");
 const video = document.getElementById("memoryVideo");
 const happyTextEl = document.getElementById("happyLetterText");
 const sadTextEl = document.getElementById("sadLetterText");
+const maybeFeedback = document.getElementById("maybeFeedback");
 
 // ── Content you can edit ──
 const slides = [
@@ -54,6 +56,19 @@ With a slightly cracked but still beating heart,
 [Your Name] 💔→❤️
 `.trim();
 
+const maybeMessages = [
+  "I knew you'd pick this one 😏",
+  "You sure about that? 🤨",
+  "Guess we're not joking anymore huh…",
+  "Still maybe? 🥺",
+  "My heart is starting to worry…",
+  "Okay… keep going if you're brave",
+  "This is getting serious now",
+  "You're really testing me huh",
+  "Just one more and I might cry fr",
+  "Alr I guess u have made ur mind… 😔"
+];
+
 // ── Helpers ──
 function showScreen(name) {
   Object.values(screens).forEach(s => s.classList.remove("active"));
@@ -85,6 +100,22 @@ function createHeart() {
 }
 setInterval(createHeart, 500);
 
+// ── No button (one-time click) ──
+noBtn.addEventListener("click", () => {
+  maybeFeedback.textContent = "Ouch.. that hurts but dw I'll still love you 😔❤️";
+  maybeFeedback.classList.add("visible");
+
+  // disable buttons to prevent multiple clicks
+  noBtn.disabled = true;
+  maybeBtn.disabled = true;
+  yesBtn.disabled = true;
+
+  setTimeout(() => {
+    showScreen("sadLetter");
+    typeWriter(sadLetterContent, sadTextEl, 50);
+  }, 2800);
+});
+
 // ── Maybe button logic ──
 let maybeCount = 0;
 const MAX_MAYBE = 10;
@@ -99,7 +130,6 @@ function moveMaybeButton() {
   maybeBtn.style.top = y + "px";
 }
 
-// Click (phone) + hover (desktop)
 maybeBtn.addEventListener("click", handleMaybeClick);
 maybeBtn.addEventListener("mouseenter", moveMaybeButton);
 
@@ -109,23 +139,48 @@ function handleMaybeClick() {
 
   if (maybeCount <= MAX_MAYBE) {
     mainHeart.className = `main-heart broken-${maybeCount}`;
-  }
 
-  if (maybeCount >= MAX_MAYBE) {
-    sadMessage.classList.add("visible");
+    // Show the corresponding message
+    maybeFeedback.textContent = maybeMessages[maybeCount - 1];
+    maybeFeedback.classList.add("visible");
 
-    setTimeout(() => {
-      showScreen("sadLetter");
-      typeWriter(sadLetterContent, sadTextEl, 50);
-    }, 1600);
+    // On 10th click → final message + sad letter
+    if (maybeCount === MAX_MAYBE) {
+      setTimeout(() => {
+        sadMessage.classList.add("visible");
+
+        setTimeout(() => {
+          showScreen("sadLetter");
+          typeWriter(sadLetterContent, sadTextEl, 50);
+        }, 1600);
+      }, 1400);
+    }
   }
 }
+
+// ── Music + Video interaction ──
+video.addEventListener("play", () => {
+  if (!bgMusic.paused) {
+    bgMusic.pause();
+  }
+});
+
+video.addEventListener("ended", () => {
+  setTimeout(() => {
+    bgMusic.play().catch(e => console.log("Music resume failed:", e));
+
+    setTimeout(() => {
+      showScreen("happyLetter");
+      typeWriter(happyLetterContent, happyTextEl, 45);
+    }, 1200);
+  }, 800);
+});
 
 // ── Yes path ──
 yesBtn.addEventListener("click", () => {
   showScreen("memories");
   bgMusic.volume = 0.45;
-  bgMusic.play().catch(() => {});
+  bgMusic.play().catch(e => console.log("Music start failed:", e));
   startSlideshow();
 });
 
@@ -160,18 +215,9 @@ function startSlideshow() {
   slideshowTimer = setInterval(next, 3800);
 }
 
-video.addEventListener("ended", () => {
-  setTimeout(() => {
-    showScreen("happyLetter");
-    typeWriter(happyLetterContent, happyTextEl, 45);
-  }, 1200);
-});
-
 // ── Start button ──
 startBtn.addEventListener("click", () => {
   showScreen("question");
-  bgMusic.volume = 0.4;
-  bgMusic.play().catch(() => {});
 });
 
 // ── Restart buttons ──
