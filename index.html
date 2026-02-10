@@ -10,10 +10,10 @@
 <body>
 
 <audio id="bgMusic" src="music/thousand_years.mp3" loop></audio>
-<div class="hearts"></div>
 
 <!-- Welcome -->
 <section id="welcome" class="screen active">
+  <div class="hearts"></div>
   <div class="content">
     <h1>Dear Sensei ❤️</h1>
     <p>A little surprise made just for you...</p>
@@ -21,32 +21,33 @@
   </div>
 </section>
 
-<!-- Question -->
+<!-- Question (no floating hearts here) -->
 <section id="question" class="screen">
   <div class="content">
     <h1>Do you love me? 🥺</h1>
-    
+
     <div class="heart-container">
       <span id="mainHeart" class="main-heart">❤️</span>
     </div>
 
-    <div class="buttons">
-        <button id="yesBtn">Yes!! 💕</button>
-        <button id="maybeBtn">Maybe... 🤔</button>
-        <button id="noBtn">No 😕</button>
-    </div>
-
-<!-- Message that changes for Maybe -->
+    <!-- Feedback messages appear here -->
     <div id="maybeFeedback" class="maybe-feedback"></div>
 
-<!-- Sad message for 10× Maybe -->
-    <div id="sadMessage" class="sad-message">Fine 😔💔</div>
+    <!-- Buttons row -->
+    <div class="buttons">
+      <button id="yesBtn">Yes!! 💕</button>
+      <button id="maybeBtn">Maybe... 🤔</button>
+      <button id="noBtn">No 😕</button>
+    </div>
 
+    <!-- Final sad message after 10× Maybe -->
+    <div id="sadMessage" class="sad-message">Fine 😔💔</div>
   </div>
 </section>
 
 <!-- Memories -->
 <section id="memories" class="screen">
+  <div class="hearts"></div>
   <div class="content">
     <h1>Our Moments 💞</h1>
     
@@ -65,6 +66,7 @@
 
 <!-- Happy Letter -->
 <section id="happyLetter" class="screen">
+  <div class="hearts"></div>
   <div class="content letter-content">
     <h1>My dearest ❤️</h1>
     <div id="happyLetterText" class="letter-text"></div>
@@ -74,6 +76,7 @@
 
 <!-- Sad Letter -->
 <section id="sadLetter" class="screen">
+  <div class="hearts"></div>
   <div class="content letter-content">
     <h1>Okay... 😔</h1>
     <div id="sadLetterText" class="letter-text"></div>

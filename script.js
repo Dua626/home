@@ -89,15 +89,21 @@ function typeWriter(text, element, speed = 45) {
   }, speed);
 }
 
+// ── Floating hearts only on screens that have .hearts ──
 function createHeart() {
+  const activeScreen = document.querySelector(".screen.active");
+  const heartsContainer = activeScreen?.querySelector(".hearts");
+  if (!heartsContainer) return;
+
   const heart = document.createElement("span");
   heart.textContent = "❤️";
   heart.style.left = Math.random() * 100 + "vw";
   heart.style.fontSize = Math.random() * 22 + 18 + "px";
   heart.style.animationDuration = Math.random() * 6 + 7 + "s";
-  document.querySelector(".hearts").appendChild(heart);
+  heartsContainer.appendChild(heart);
   setTimeout(() => heart.remove(), 15000);
 }
+
 setInterval(createHeart, 500);
 
 // ── No button (one-time click) ──
@@ -105,7 +111,6 @@ noBtn.addEventListener("click", () => {
   maybeFeedback.textContent = "Ouch.. that hurts but dw I'll still love you 😔❤️";
   maybeFeedback.classList.add("visible");
 
-  // disable buttons to prevent multiple clicks
   noBtn.disabled = true;
   maybeBtn.disabled = true;
   yesBtn.disabled = true;
@@ -121,10 +126,21 @@ let maybeCount = 0;
 const MAX_MAYBE = 10;
 
 function moveMaybeButton() {
-  const maxX = window.innerWidth - maybeBtn.offsetWidth - 50;
-  const maxY = window.innerHeight - maybeBtn.offsetHeight - 50;
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
+  const container = document.querySelector("#question .content");
+  const containerRect = container.getBoundingClientRect();
+
+  const btnWidth = maybeBtn.offsetWidth;
+  const btnHeight = maybeBtn.offsetHeight;
+
+  // Safe area: avoid title, heart, feedback
+  const safeMinY = containerRect.top + 280;  // below heart + feedback
+  const safeMaxY = window.innerHeight - btnHeight - 60;
+  const safeMinX = 40;
+  const safeMaxX = window.innerWidth - btnWidth - 40;
+
+  let x = Math.random() * (safeMaxX - safeMinX) + safeMinX;
+  let y = Math.random() * (safeMaxY - safeMinY) + safeMinY;
+
   maybeBtn.style.position = "fixed";
   maybeBtn.style.left = x + "px";
   maybeBtn.style.top = y + "px";
@@ -140,15 +156,12 @@ function handleMaybeClick() {
   if (maybeCount <= MAX_MAYBE) {
     mainHeart.className = `main-heart broken-${maybeCount}`;
 
-    // Show the corresponding message
     maybeFeedback.textContent = maybeMessages[maybeCount - 1];
     maybeFeedback.classList.add("visible");
 
-    // On 10th click → final message + sad letter
     if (maybeCount === MAX_MAYBE) {
       setTimeout(() => {
         sadMessage.classList.add("visible");
-
         setTimeout(() => {
           showScreen("sadLetter");
           typeWriter(sadLetterContent, sadTextEl, 50);
@@ -168,7 +181,6 @@ video.addEventListener("play", () => {
 video.addEventListener("ended", () => {
   setTimeout(() => {
     bgMusic.play().catch(e => console.log("Music resume failed:", e));
-
     setTimeout(() => {
       showScreen("happyLetter");
       typeWriter(happyLetterContent, happyTextEl, 45);

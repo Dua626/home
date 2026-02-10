@@ -1,4 +1,5 @@
 * { margin:0; padding:0; box-sizing:border-box; }
+
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #fff0f6, #ffebee);
@@ -24,17 +25,27 @@ h1 {
   font-family: 'Great Vibes', cursive;
   font-size: clamp(2.8rem, 10vw, 5rem);
   color: #e91e63;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.content { max-width: 420px; width: 100%; }
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 420px;
+  width: 100%;
+}
 
 .buttons {
   display: flex;
-  gap: 2rem;
-  justify-content: center;
   flex-wrap: wrap;
-  margin-top: 2rem;
+  justify-content: center;
+  gap: 1.2rem 2rem;
+  margin: 1rem 0;
+  width: 100%;
+  position: relative;
 }
 
 button {
@@ -46,24 +57,17 @@ button {
   transition: all 0.3s;
 }
 
-
-#yesBtn, #startBtn { background: #e91e63; color: white; box-shadow: 0 10px 30px rgba(233,30,99,0.4); }
-#maybeBtn { background: #78909c; color: white; }
-
-button:hover { transform: scale(1.08); }
-
-.maybe-feedback {
-  margin-top: 1.5rem;
-  font-size: 1.2rem;
-  color: #e91e63;
-  min-height: 1.6em;
-  font-style: italic;
-  opacity: 0;
-  transition: opacity 0.7s ease;
+#yesBtn, #startBtn { 
+  background: #e91e63; 
+  color: white; 
+  box-shadow: 0 10px 30px rgba(233,30,99,0.4); 
 }
 
-.maybe-feedback.visible {
-  opacity: 1;
+#maybeBtn { 
+  background: #78909c; 
+  color: white; 
+  position: relative;
+  z-index: 10;
 }
 
 #noBtn {
@@ -72,18 +76,45 @@ button:hover { transform: scale(1.08); }
   box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
-#noBtn:hover {
-  background: #616161;
+#noBtn:hover { background: #616161; }
+
+button:hover { transform: scale(1.08); }
+
+/* Maybe feedback */
+.maybe-feedback {
+  margin: 1rem 0 2.5rem 0;
+  font-size: 1.2rem;
+  color: #e91e63;
+  min-height: 1.8em;
+  font-style: italic;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  width: 100%;
+  max-width: 360px;
+}
+
+.maybe-feedback.visible {
+  opacity: 1;
 }
 
 /* Heart */
-.heart-container { margin: 2.5rem 0; height: 140px; }
+.heart-container {
+  margin: 1.5rem 0 2rem 0;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .main-heart {
   font-size: 7rem;
   transition: all 0.9s ease;
   position: relative;
   display: inline-block;
 }
+
+/* Broken heart stages */
 .main-heart.broken-1 { transform: scale(0.92); opacity: 0.92; }
 .main-heart.broken-2 { transform: scale(0.85); opacity: 0.85; }
 .main-heart.broken-3 { transform: scale(0.78); opacity: 0.78; }
@@ -98,6 +129,7 @@ button:hover { transform: scale(1.08); }
   opacity: 0.28;
   filter: grayscale(100%) brightness(0.6);
 }
+
 .main-heart.broken-6::after,
 .main-heart.broken-7::after,
 .main-heart.broken-8::after,
@@ -112,13 +144,14 @@ button:hover { transform: scale(1.08); }
 
 /* Sad message */
 .sad-message {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   color: #e53935;
   margin-top: 2rem;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px);
   transition: all 0.9s ease;
 }
+
 .sad-message.visible {
   opacity: 1;
   transform: translateY(0);
@@ -178,4 +211,6 @@ button:hover { transform: scale(1.08); }
   animation: float 8s linear forwards;
   z-index: 999;
 }
-@keyframes float { to { transform: translateY(-120vh) rotate(25deg); opacity: 0; } }
+@keyframes float { 
+  to { transform: translateY(-120vh) rotate(25deg); opacity: 0; } 
+}
