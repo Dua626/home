@@ -89,7 +89,7 @@ function typeWriter(text, element, speed = 45) {
   }, speed);
 }
 
-// ── Floating hearts only on screens that have .hearts ──
+// ── Floating hearts only on screens with .hearts ──
 function createHeart() {
   const activeScreen = document.querySelector(".screen.active");
   const heartsContainer = activeScreen?.querySelector(".hearts");
@@ -103,7 +103,6 @@ function createHeart() {
   heartsContainer.appendChild(heart);
   setTimeout(() => heart.remove(), 15000);
 }
-
 setInterval(createHeart, 500);
 
 // ── No button (one-time click) ──
@@ -125,15 +124,19 @@ noBtn.addEventListener("click", () => {
 let maybeCount = 0;
 const MAX_MAYBE = 10;
 
+// Detect if device is mobile/touch
+const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
 function moveMaybeButton() {
+  if (isMobile) return; // no movement on mobile
+
   const container = document.querySelector("#question .content");
   const containerRect = container.getBoundingClientRect();
 
   const btnWidth = maybeBtn.offsetWidth;
   const btnHeight = maybeBtn.offsetHeight;
 
-  // Safe area: avoid title, heart, feedback
-  const safeMinY = containerRect.top + 280;  // below heart + feedback
+  const safeMinY = containerRect.top + 280;
   const safeMaxY = window.innerHeight - btnHeight - 60;
   const safeMinX = 40;
   const safeMaxX = window.innerWidth - btnWidth - 40;
@@ -141,17 +144,28 @@ function moveMaybeButton() {
   let x = Math.random() * (safeMaxX - safeMinX) + safeMinX;
   let y = Math.random() * (safeMaxY - safeMinY) + safeMinY;
 
+  x = Math.max(20, Math.min(x, safeMaxX));
+  y = Math.max(safeMinY, Math.min(y, safeMaxY - 100));
+
   maybeBtn.style.position = "fixed";
   maybeBtn.style.left = x + "px";
   maybeBtn.style.top = y + "px";
 }
 
+// Only enable hover movement on non-mobile devices
+if (!isMobile) {
+  maybeBtn.addEventListener("mouseenter", moveMaybeButton);
+}
+
 maybeBtn.addEventListener("click", handleMaybeClick);
-maybeBtn.addEventListener("mouseenter", moveMaybeButton);
 
 function handleMaybeClick() {
   maybeCount++;
-  moveMaybeButton();
+  
+  // Only move on non-mobile
+  if (!isMobile) {
+    moveMaybeButton();
+  }
 
   if (maybeCount <= MAX_MAYBE) {
     mainHeart.className = `main-heart broken-${maybeCount}`;

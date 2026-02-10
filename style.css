@@ -38,23 +38,35 @@ h1 {
   width: 100%;
 }
 
+/* Buttons – stacked on mobile, horizontal on desktop */
 .buttons {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.2rem 2rem;
-  margin: 1rem 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 1.5rem 0;
   width: 100%;
-  position: relative;
+  max-width: 320px;
+}
+
+@media (min-width: 768px) {
+  .buttons {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem 2.5rem;
+    max-width: none;
+  }
 }
 
 button {
-  padding: 0.9rem 2.5rem;
-  font-size: 1.25rem;
+  padding: 1rem 2rem;
+  font-size: 1.3rem;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s;
+  width: 100%;
+  max-width: 280px;
 }
 
 #yesBtn, #startBtn { 
@@ -114,7 +126,6 @@ button:hover { transform: scale(1.08); }
   display: inline-block;
 }
 
-/* Broken heart stages */
 .main-heart.broken-1 { transform: scale(0.92); opacity: 0.92; }
 .main-heart.broken-2 { transform: scale(0.85); opacity: 0.85; }
 .main-heart.broken-3 { transform: scale(0.78); opacity: 0.78; }
