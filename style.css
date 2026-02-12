@@ -16,7 +16,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem;
 }
 
 .screen.active { display: flex; }
@@ -25,7 +25,7 @@ h1 {
   font-family: 'Great Vibes', cursive;
   font-size: clamp(2.6rem, 9vw, 4.5rem);
   color: #e91e63;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   line-height: 1.1;
 }
 
@@ -34,12 +34,14 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.8rem;
+  gap: 2rem;
   width: 100%;
   max-width: 420px;
+  min-height: 100vh;
+  padding-top: 1.5rem;
 }
 
-/* Buttons – stacked on mobile, horizontal on desktop */
+/* Buttons */
 .buttons {
   display: flex;
   flex-direction: column;
@@ -89,8 +91,6 @@ button {
   box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
-#noBtn:hover { background: #616161; }
-
 button:hover { transform: scale(1.08); }
 
 /* Maybe feedback */
@@ -106,7 +106,6 @@ button:hover { transform: scale(1.08); }
   width: 100%;
   max-width: 360px;
 }
-
 .maybe-feedback.visible { opacity: 1; }
 
 /* Heart */
@@ -122,9 +121,9 @@ button:hover { transform: scale(1.08); }
   font-size: 7rem;
   transition: all 0.9s ease;
   position: relative;
-  display: inline-block;
 }
 
+/* Broken heart stages */
 .main-heart.broken-1 { transform: scale(0.92); opacity: 0.92; }
 .main-heart.broken-2 { transform: scale(0.85); opacity: 0.85; }
 .main-heart.broken-3 { transform: scale(0.78); opacity: 0.78; }
@@ -140,18 +139,6 @@ button:hover { transform: scale(1.08); }
   filter: grayscale(100%) brightness(0.6);
 }
 
-.main-heart.broken-6::after,
-.main-heart.broken-7::after,
-.main-heart.broken-8::after,
-.main-heart.broken-9::after,
-.main-heart.broken-10::after {
-  content: "💔";
-  position: absolute;
-  top: 0; left: 0;
-  font-size: 7rem;
-  opacity: 0.75;
-}
-
 /* Sad message */
 .sad-message {
   font-size: 2.2rem;
@@ -161,7 +148,6 @@ button:hover { transform: scale(1.08); }
   transform: translateY(20px);
   transition: all 0.9s ease;
 }
-
 .sad-message.visible {
   opacity: 1;
   transform: translateY(0);
@@ -195,7 +181,7 @@ button:hover { transform: scale(1.08); }
   margin: 2rem 0;
 }
 
-/* Letters */
+/* Letters – typewriter style */
 .letter-content {
   background: white;
   padding: 2.5rem 2rem;
@@ -204,11 +190,18 @@ button:hover { transform: scale(1.08); }
   max-width: 520px;
 }
 .letter-text {
-  font-size: 1.15rem;
-  line-height: 1.85;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.05rem;
+  line-height: 1.75;
   text-align: left;
   margin: 2rem 0;
   white-space: pre-wrap;
+  letter-spacing: 0.4px;
+  color: #222;
+  background: #fdfdfd;
+  padding: 1.5rem;
+  border-left: 4px solid #e91e63;
+  border-radius: 8px;
 }
 
 /* Floating hearts */
@@ -225,52 +218,21 @@ button:hover { transform: scale(1.08); }
   to { transform: translateY(-120vh) rotate(25deg); opacity: 0; } 
 }
 
-/* ── NEW STYLES: Quiz, Score & Reveal ── */
-.quiz-question {
-  font-size: 1.35rem;
-  line-height: 1.5;
-  min-height: 4em;
-  margin: 1.5rem 0;
-  text-align: left;
-}
-
+/* Quiz & Score */
+.quiz-question { font-size: 1.35rem; line-height: 1.5; min-height: 4em; margin: 1.5rem 0; text-align: left; }
 .quiz-options button {
-  width: 100%;
-  max-width: 340px;
-  margin: 0.7rem 0;
-  padding: 1.1rem;
-  border-radius: 50px;
-  background: #f8bbd0;
-  font-size: 1.15rem;
-  transition: all 0.25s;
+  width: 100%; max-width: 340px; margin: 0.7rem 0; padding: 1.1rem; border-radius: 50px;
+  background: #f8bbd0; font-size: 1.15rem; transition: all 0.25s;
 }
+.quiz-options button:hover { background: #e91e63; color: white; transform: scale(1.03); }
 
-.quiz-options button:hover {
-  background: #e91e63;
-  color: white;
-  transform: scale(1.03);
-}
-
-.score-big {
-  font-size: 7rem;
-  font-weight: 700;
-  color: #e91e63;
-  margin: 0.5rem 0;
-}
-
-.score-title {
-  font-size: 1.5rem;
-  font-style: italic;
-  margin-bottom: 3rem;
-}
+.score-big { font-size: 7rem; font-weight: 700; color: #e91e63; margin: 0.5rem 0; }
+.score-title { font-size: 1.5rem; font-style: italic; margin-bottom: 3rem; }
 
 /* Reveal Page */
-.reveal-content {
-  gap: 2rem;
-  padding-bottom: 2rem;
-}
+.reveal-content { gap: 2.2rem; padding-bottom: 2rem; }
 
-.template-stack {
+.template-container {
   position: relative;
   width: 100%;
   max-width: 340px;
@@ -278,17 +240,17 @@ button:hover { transform: scale(1.08); }
   margin: 1rem auto;
 }
 
-.grid-img {
+.template-grid {
   position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 16px;
-  box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  transition: opacity 0.8s ease;
 }
 
-.top { transform: rotate(-6deg); z-index: 1; }
-.bottom { transform: rotate(6deg); z-index: 2; }
+.template-grid.hidden { opacity: 0; pointer-events: none; }
 
 .playful-note {
   font-size: 1.15rem;
@@ -301,6 +263,7 @@ button:hover { transform: scale(1.08); }
   max-width: 380px;
 }
 
+/* Category reveal */
 .category-reveal {
   width: 100%;
   max-width: 380px;
@@ -308,7 +271,6 @@ button:hover { transform: scale(1.08); }
   transform: translateY(20px);
   transition: all 0.6s ease;
 }
-
 .category-reveal:not(.hidden) {
   opacity: 1;
   transform: translateY(0);
@@ -324,19 +286,43 @@ button:hover { transform: scale(1.08); }
 }
 
 .cat-reason {
-  font-size: 1.15rem;
-  line-height: 1.8;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  line-height: 1.65;
   text-align: left;
-  background: white;
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  background: #fdfdfd;
+  padding: 1.4rem;
+  border-left: 4px solid #ff4081;
+  border-radius: 8px;
+  letter-spacing: 0.3px;
+  color: #222;
+  margin-top: 1rem;
 }
 
+/* Minimal arrow navigation */
+.arrow-nav {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+.arrow-nav button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #e91e63;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.2s;
+}
+.arrow-nav button:active { transform: scale(1.3); }
+
+/* Final reveal */
 .final-reveal h1 {
   font-size: 2rem;
   color: #e91e63;
   margin-bottom: 2.5rem;
+  line-height: 1.3;
 }
 
 .end-buttons button {

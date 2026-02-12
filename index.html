@@ -95,15 +95,17 @@
   </div>
 </section>
 
-<!-- Reveal Page -->
+<!-- Reveal Page – Clean initial view -->
 <section id="revealPage" class="screen">
   <div class="content reveal-content">
-    <!-- Stacked grids -->
-    <div class="template-stack">
-      <img src="images/hhsm.jpeg" alt="How he sees me" class="grid-img top">
-      <img src="images/hish.jpeg" alt="How I see you" class="grid-img bottom">
+
+    <!-- Alternating images -->
+    <div class="template-container">
+      <img id="grid1" src="images/hhsm.jpeg" class="template-grid" alt="How he sees me">
+      <img id="grid2" src="images/hish.jpeg" class="template-grid hidden" alt="How I see you">
     </div>
 
+    <!-- Playful note -->
     <div class="playful-note">
       I love that u put so much thought into making this for me..<br><br>
       I was surprised that u see me as a butterfly hehe..<br>
@@ -119,15 +121,18 @@
 
     <button id="startRevealBtn">Show me your answers ❤️</button>
 
-    <!-- Category reveal -->
+    <!-- Category reveal (hidden initially) -->
     <div id="categoryReveal" class="category-reveal hidden">
       <h2 id="catTitle"></h2>
       <img id="catImage" class="cat-image" src="" alt="">
       <div id="catReason" class="cat-reason"></div>
-      <button id="nextCatBtn">Next ❤️</button>
+      <div class="arrow-nav">
+        <button id="prevCatBtn">←</button>
+        <button id="nextCatBtn">→</button>
+      </div>
     </div>
 
-    <!-- Final screen -->
+    <!-- Final clean page -->
     <div id="finalReveal" class="final-reveal hidden">
       <h1>You’re my goldfish, my ocean meeting, my black rose… my everything 💛🖤</h1>
       <div class="end-buttons">

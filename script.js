@@ -1,4 +1,4 @@
-// ==================== COMPLETE script.js ====================
+// ==================== COMPLETE UPDATED script.js ====================
 
 const screens = {
   welcome: document.getElementById("welcome"),
@@ -38,8 +38,13 @@ const categoryReveal = document.getElementById("categoryReveal");
 const catTitle = document.getElementById("catTitle");
 const catImage = document.getElementById("catImage");
 const catReason = document.getElementById("catReason");
+const prevCatBtn = document.getElementById("prevCatBtn");
 const nextCatBtn = document.getElementById("nextCatBtn");
 const finalReveal = document.getElementById("finalReveal");
+
+// Grid alternating elements
+const grid1 = document.getElementById("grid1");
+const grid2 = document.getElementById("grid2");
 
 // ── Content ──
 const slides = [
@@ -90,7 +95,6 @@ const maybeMessages = [
   "Alr I guess u have made ur mind… 😔"
 ];
 
-// Quiz questions (you can add more)
 const quizQuestions = [
   { q: "What is my favorite color?", a: "Purple", options: ["Blue", "Purple", "Pink", "Black"] },
   { q: "What food do I always steal from your plate?", a: "Sajji", options: ["Biryani", "Sajji", "Burger", "Pizza"] },
@@ -99,7 +103,6 @@ const quizQuestions = [
   { q: "What drink do I secretly love?", a: "Fanta", options: ["Coke", "Fanta", "Khajoor shake", "Tea"] }
 ];
 
-// Your 9 answers with cleaned text
 const myAnswers = [
   { cat: "Animal", img: "images/1.jpeg", reason: "goldfish; because he has a 10 sec memory 😂" },
   { cat: "Place", img: "images/2.jpeg", reason: "ocean where two oceans meet; because the sight has always been breathtaking for me.. and it makes me realize how perfectly the universe is crafted by God.. just two oceans meeting.. he has the perfect blend of spiritual and worldly sides — his personalities don’t cancel each other but complement each other and create perfect balance 🌊" },
@@ -132,7 +135,7 @@ function typeWriter(text, element, speed = 45) {
   }, speed);
 }
 
-// Floating hearts only on screens that have .hearts
+// Floating hearts only on screens with .hearts
 function createHeart() {
   const activeScreen = document.querySelector(".screen.active");
   const heartsContainer = activeScreen?.querySelector(".hearts");
@@ -300,24 +303,49 @@ function showScoreScreen() {
   showScreen("score");
 }
 
+// ── Score → Reveal Page ──
 rememberBtn.addEventListener("click", () => {
   showScreen("revealPage");
   initTemplateReveal();
 });
 
-// ── Template Reveal ──
+// ── Reveal Page Logic ──
 let revealIndex = 0;
+let gridInterval = null;
 
 function initTemplateReveal() {
+  grid1.classList.remove("hidden");
+  grid2.classList.add("hidden");
   startRevealBtn.style.display = "block";
   categoryReveal.classList.add("hidden");
   finalReveal.classList.add("hidden");
+
+  // Start alternating animation
+  let showGrid1 = true;
+  gridInterval = setInterval(() => {
+    if (showGrid1) {
+      grid1.classList.add("hidden");
+      grid2.classList.remove("hidden");
+    } else {
+      grid2.classList.add("hidden");
+      grid1.classList.remove("hidden");
+    }
+    showGrid1 = !showGrid1;
+  }, 1200); // change every 1.2 seconds
 }
 
 startRevealBtn.addEventListener("click", () => {
+  clearInterval(gridInterval);
   startRevealBtn.style.display = "none";
   categoryReveal.classList.remove("hidden");
   revealIndex = 0;
+  showNextCategory();
+});
+
+// Minimal arrow navigation
+prevCatBtn.addEventListener("click", () => {
+  revealIndex--;
+  if (revealIndex < 0) revealIndex = 0;
   showNextCategory();
 });
 
@@ -338,6 +366,10 @@ function showNextCategory() {
   catReason.textContent = item.reason;
 }
 
+// ── Sad Letter Try Again ──
+document.getElementById("restartSad").addEventListener("click", () => {
+  location.reload(); // or showScreen("welcome") if you prefer
+});
+
 // ── Restart buttons ──
 document.getElementById("restartHappy").addEventListener("click", () => location.reload());
-document.getElementById("restartSad").addEventListener("click", () => location.reload());
