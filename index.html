@@ -21,26 +21,19 @@
   </div>
 </section>
 
-<!-- Question (no floating hearts here) -->
+<!-- Question -->
 <section id="question" class="screen">
   <div class="content">
     <h1>Do you love me? 🥺</h1>
-
     <div class="heart-container">
       <span id="mainHeart" class="main-heart">❤️</span>
     </div>
-
-    <!-- Feedback messages appear here -->
     <div id="maybeFeedback" class="maybe-feedback"></div>
-
-    <!-- Buttons -->
     <div class="buttons">
       <button id="yesBtn">Yes!! 💕</button>
       <button id="maybeBtn">Maybe... 🤔</button>
       <button id="noBtn">No 😕</button>
     </div>
-
-    <!-- Final sad message after 10× Maybe -->
     <div id="sadMessage" class="sad-message">Fine 😔💔</div>
   </div>
 </section>
@@ -50,14 +43,12 @@
   <div class="hearts"></div>
   <div class="content">
     <h1>Our Moments 💞</h1>
-    
     <div class="slideshow-container">
       <div class="slide-frame">
         <img id="slideImg" src="images/img1.jpeg" alt="">
       </div>
       <div id="caption" class="caption"></div>
     </div>
-
     <video id="memoryVideo" controls playsinline>
       <source src="video/memory.mp4" type="video/mp4">
     </video>
@@ -70,7 +61,7 @@
   <div class="content letter-content">
     <h1>My dearest ❤️</h1>
     <div id="happyLetterText" class="letter-text"></div>
-    <button id="restartHappy">Read again</button>
+    <button id="nextBtn">Next ❤️</button>
   </div>
 </section>
 
@@ -81,6 +72,69 @@
     <h1>Okay... 😔</h1>
     <div id="sadLetterText" class="letter-text"></div>
     <button id="restartSad">Try again?</button>
+  </div>
+</section>
+
+<!-- Quiz -->
+<section id="quiz" class="screen">
+  <div class="content">
+    <h1>How well do you know me?</h1>
+    <div id="questionText" class="quiz-question"></div>
+    <div id="options" class="quiz-options"></div>
+    <div id="quizProgress">Question <span id="currentQ">1</span>/7</div>
+  </div>
+</section>
+
+<!-- Score -->
+<section id="score" class="screen">
+  <div class="content">
+    <h1>Your Score</h1>
+    <div id="scoreNumber" class="score-big">0%</div>
+    <div id="scoreTitle" class="score-title"></div>
+    <button id="rememberBtn">Do u remember?...</button>
+  </div>
+</section>
+
+<!-- Reveal Page -->
+<section id="revealPage" class="screen">
+  <div class="content reveal-content">
+    <!-- Stacked grids -->
+    <div class="template-stack">
+      <img src="images/hhsm.jpeg" alt="How he sees me" class="grid-img top">
+      <img src="images/hish.jpeg" alt="How I see you" class="grid-img bottom">
+    </div>
+
+    <div class="playful-note">
+      I love that u put so much thought into making this for me..<br><br>
+      I was surprised that u see me as a butterfly hehe..<br>
+      and wow i knew shinobu would be my character.. but lol i dint knew u see me as anya too > <..<br>
+      and wow sensei.. u still remember witchcraft.. as my hobby.. hheehe..<br>
+      and thanks for remembering my fav color purple 💜<br><br>
+      and i am surprised to know that u like fanta.. how come we always order coke then lol..<br>
+      but hehe this made my day.. u selected fanta for me and u said because u like fanta..<br>
+      a=b=c means u like me hehe 😏<br><br>
+      Anyway ik you're not too good expressing yourself.. nor am I..<br>
+      so instead of explaining verbally, I thought this would be a better way to tell u why I chose everything →
+    </div>
+
+    <button id="startRevealBtn">Show me your answers ❤️</button>
+
+    <!-- Category reveal -->
+    <div id="categoryReveal" class="category-reveal hidden">
+      <h2 id="catTitle"></h2>
+      <img id="catImage" class="cat-image" src="" alt="">
+      <div id="catReason" class="cat-reason"></div>
+      <button id="nextCatBtn">Next ❤️</button>
+    </div>
+
+    <!-- Final screen -->
+    <div id="finalReveal" class="final-reveal hidden">
+      <h1>You’re my goldfish, my ocean meeting, my black rose… my everything 💛🖤</h1>
+      <div class="end-buttons">
+        <button onclick="showScreen('memories')">See our memories again</button>
+        <button onclick="location.reload()">Back to start</button>
+      </div>
+    </div>
   </div>
 </section>
 
