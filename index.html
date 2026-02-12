@@ -22,7 +22,7 @@
 
 <section id="question" class="screen">
   <div class="content">
-    <h2>my most stupid (yet favurite) question</h2>
+    <p>my most stupid (yet favourite) question</p>
     <h1>Do you love me? 🥺</h1>
     <div class="heart-container">
       <span id="mainHeart" class="main-heart">❤️</span>
@@ -33,7 +33,7 @@
       <button id="maybeBtn">Maybe 🤔</button>
       <button id="noBtn">Nahh </button>
     </div>
-    <div id="sadMessage" class="sad-message">Fine 😔💔</div>
+    <div id="sadMessage" class="sad-message"></div>
   </div>
 </section>
 
@@ -41,15 +41,20 @@
   <div class="hearts"></div>
   <div class="content">
     <h1>Our Moments 💞</h1>
-    <div class="slideshow-container">
-      <div class="slide-frame">
+    <div class="unified-container">
+      <div class="media-frame">
         <img id="slideImg" src="images/img1.jpeg" alt="">
+        <video id="memoryVideo" playsinline>
+          <source src="video/memory.mp4" type="video/mp4">
+        </video>
+        
+        <div class="media-nav">
+          <button id="prevSlide">←</button>
+          <button id="nextSlide">→</button>
+        </div>
       </div>
       <div id="caption" class="caption"></div>
     </div>
-    <video id="memoryVideo" playsinline>
-      <source src="video/memory.mp4" type="video/mp4">
-    </video>
   </div>
 </section>
 
@@ -76,7 +81,7 @@
     <h1>Let's see how 'Goldfish' are u</h1>
     <div id="questionText" class="quiz-question"></div>
     <div id="options" class="quiz-options"></div>
-    <div id="quizProgress">Question <span id="currentQ">1</span>/7</div>
+    <div id="quizProgress">Question <span id="currentQ">1</span>/10</div>
   </div>
 </section>
 
@@ -85,6 +90,12 @@
     <h1>Your Score</h1>
     <div id="scoreNumber" class="score-big">0%</div>
     <div id="scoreTitle" class="score-title"></div>
+    
+    <div id="quizReview" class="quiz-review">
+      <h3 style="font-size: 1rem; color: #e91e63; margin-bottom: 0.5rem;">Answer Key:</h3>
+      <div id="reviewList"></div>
+    </div>
+
     <button id="rememberBtn">Do u remember?..</button>
   </div>
 </section>
@@ -93,6 +104,9 @@
   <div class="content reveal-content">
 
     <div id="initialRevealView">
+        <div class="playful-note">
+        I just made u do this trend...
+      </div>
       <div class="template-container">
         <img id="grid1" src="images/hhsm.jpeg" class="template-grid" alt="">
         <img id="grid2" src="images/hish.jpeg" class="template-grid hidden" alt="">

@@ -47,6 +47,11 @@ const finalReveal = document.getElementById("finalReveal");
 const grid1 = document.getElementById("grid1");
 const grid2 = document.getElementById("grid2");
 
+// Media Frame for Swipe Logic
+const mediaFrame = document.querySelector(".media-frame");
+let touchStartX = 0;
+let touchEndX = 0;
+
 // ── Content ──
 const slides = [
   { src: "images/img1.jpeg", caption: "The day we met" },
@@ -67,7 +72,7 @@ const maybeMessages = [
   "Still maybe? 🥺",
   "Okay… keep going if you're brave",
   "Thkk",
-  "Wow you're persistent (So am I tho)",
+  "Wow you''re persistent (So am I tho)",
   "Well a 'maybe' is better than a 'No'",
   "Just one more and I might cry fr",
   "Alr I guess this is it"
@@ -184,28 +189,75 @@ yesBtn.addEventListener("click", () => {
   showScreen("memories");
   bgMusic.volume = 0.45;
   bgMusic.play().catch(() => {});
-  startSlideshow();
+  // Initialize unified media
+  slideIndex = 0;
+  updateMedia();
 });
 
-// ── Slideshow ──
+// ── Unified Memories Logic (Swipe + Arrows) ──
 let slideIndex = 0;
-function startSlideshow() {
-  slideImg.parentElement.style.display = "block";
+
+function updateMedia() {
+  // Reset visibility
+  slideImg.classList.remove("hidden");
   video.style.display = "none";
-  const timer = setInterval(() => {
+  video.pause();
+
+  if (slideIndex < slides.length) {
+    slideImg.src = slides[slideIndex].src;
+    captionEl.textContent = slides[slideIndex].caption;
+    // Ensure arrows are visible (except on video)
+    document.querySelector(".media-nav").style.display = "flex";
+  } else {
+    // Show video on the "last" index
+    slideImg.classList.add("hidden");
+    video.style.display = "block";
+    captionEl.textContent = "A special message for you... ❤️";
+    video.play();
+    // Hide arrows during video
+    document.querySelector(".media-nav").style.display = "none";
+  }
+}
+
+// Navigation Functions
+function handleNext() {
+  if (slideIndex <= slides.length - 1) { // Allows going to video index
     slideIndex++;
-    if (slideIndex >= slides.length) {
-      clearInterval(timer);
-      slideImg.parentElement.style.display = "none";
-      video.style.display = "block";
-      video.play();
-    } else {
-      slideImg.src = slides[slideIndex].src;
-      captionEl.textContent = slides[slideIndex].caption;
+    updateMedia();
+  }
+}
+
+function handlePrev() {
+  if (slideIndex > 0) {
+    slideIndex--;
+    updateMedia();
+  }
+}
+
+// Desktop Arrow Events
+document.getElementById("nextSlide").onclick = handleNext;
+document.getElementById("prevSlide").onclick = handlePrev;
+
+// Mobile Swipe Events
+if (mediaFrame) {
+  mediaFrame.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+  }, false);
+
+  mediaFrame.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+  }, false);
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    if (touchEndX < touchStartX - swipeThreshold) {
+        handleNext(); // Swipe Left -> Next
     }
-  }, 3500);
-  slideImg.src = slides[0].src;
-  captionEl.textContent = slides[0].caption;
+    if (touchEndX > touchStartX + swipeThreshold) {
+        handlePrev(); // Swipe Right -> Back
+    }
 }
 
 startBtn.onclick = () => showScreen("question");
@@ -217,10 +269,7 @@ let quizScore = 0;
 function startQuiz() { qIdx = 0; quizScore = 0; loadQ(); }
 function loadQ() {
   if (qIdx >= quizQuestions.length) {
-    showScreen("score");
-    const p = Math.round((quizScore / quizQuestions.length) * 100);
-    scoreNumber.textContent = p + "%";
-    scoreTitle.textContent = p >= 80 ? "Wow Sensei! ❤️" : "Guess we gotta hangout more! 😉";
+    showScoreScreen();
     return;
   }
   const q = quizQuestions[qIdx];
@@ -233,6 +282,29 @@ function loadQ() {
     b.onclick = () => { if (opt === q.a) quizScore++; qIdx++; loadQ(); };
     optionsDiv.appendChild(b);
   });
+}
+
+function showScoreScreen() {
+  const percent = Math.round((quizScore / quizQuestions.length) * 100);
+  scoreNumber.textContent = percent + "%";
+  scoreTitle.textContent = percent >= 80 ? "Wow Sensei! ❤️" : "Guess we gotta hangout more! 😉";
+  
+  // Populate Quiz Review
+  const reviewList = document.getElementById("reviewList");
+  if (reviewList) {
+    reviewList.innerHTML = "";
+    quizQuestions.forEach((q, index) => {
+      const item = document.createElement("div");
+      item.className = "review-item";
+      item.innerHTML = `
+        <p><strong>${index + 1}. ${q.q}</strong></p>
+        <p class="correct-ans">Right Answer: ${q.a}</p>
+      `;
+      reviewList.appendChild(item);
+    });
+  }
+
+  showScreen("score");
 }
 
 // ── Reveal Sequence ──
@@ -269,4 +341,8 @@ function showCat() {
 }
 
 document.getElementById("restartSad").onclick = () => location.reload();
-document.getElementById("seeMemoriesAgain").onclick = () => { slideIndex = 0; showScreen("memories"); startSlideshow(); };
+document.getElementById("seeMemoriesAgain").onclick = () => { 
+  slideIndex = 0; 
+  showScreen("memories"); 
+  updateMedia(); 
+};
