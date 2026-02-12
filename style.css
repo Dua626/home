@@ -87,6 +87,19 @@ button {
   box-shadow: 0 8px 25px rgba(233,30,99,0.3); 
 }
 
+#question .content p {
+  font-family: 'Poppins', sans-serif; /* Keeps it readable */
+  font-style: italic;                 /* Adds the "whisper" feel */
+  font-size: 1.1rem;
+  color: #e91e63;                     /* Matches the theme pink */
+  margin-bottom: 0.2rem;              /* Pulls it closer to the main question */
+  opacity: 0.9;
+}
+
+.correct-ans {
+  color: #e91e63;  /* Matches the buttons and hearts */
+}
+
 #maybeBtn { background: #78909c; color: white; z-index: 100; }
 #noBtn { background: #757575; color: white; }
 
@@ -274,6 +287,34 @@ button:active { transform: scale(0.95); }
 }
 
 /* Reveal Page Styles */
+
+
+/* --- FIX FOR REVEAL PAGE SCROLLING --- */
+
+/* Force this specific page to start at the top, not center */
+#revealPage {
+  justify-content: flex-start !important;
+  padding-top: 80px; /* Space from top edge */
+  height: 100vh;
+  overflow-y: auto; /* Enable scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scroll on mobile */
+}
+
+/* Ensure the content inside can scroll fully */
+#revealPage .content {
+  justify-content: flex-start;
+  max-width: 420px;
+  margin-bottom: 50px; /* Space at bottom for scrolling */
+}
+
+/* Styling for the "I just made u do this trend" text */
+.intro-note {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: #e91e63;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
 .template-container {
   position: relative;
   width: 280px;
