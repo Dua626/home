@@ -362,9 +362,33 @@ button:active { transform: scale(0.95); }
   width: auto;
   padding: 0;
 }
+/* --- FINAL REVEAL SPECIAL STYLES --- */
 
-.final-reveal h1 { font-size: 1.8rem; margin-bottom: 3rem; }
-.end-buttons { display: flex; flex-direction: column; gap: 1rem; width: 100%; align-items: center; }
+/* 1. Change H1 Font to be readable & emotional */
+#revealFinal h1 {
+  font-family: 'Poppins', sans-serif; /* Clean font instead of Cursive */
+  font-size: 1.1rem;                  /* Paragraph size */
+  font-weight: 400;
+  font-style: italic;                 /* Italic for "love letter" feel */
+  line-height: 1.8;                   /* More space between lines */
+  text-transform: none;
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+}
+
+/* 2. Change Buttons to Pink Text (Inverted Style) */
+#revealFinal button {
+  background: white;          /* White background */
+  color: #e91e63;             /* Pink text */
+  border: 2px solid #e91e63;  /* Pink border */
+  font-weight: 600;
+}
+
+/* Optional: Hover effect for these specific buttons */
+#revealFinal button:hover {
+  background: #fce4ec;        /* Very light pink on hover */
+  transform: scale(1.05);
+}
 
 @media (max-width: 768px) {
   .media-nav button {
