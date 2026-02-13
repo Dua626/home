@@ -56,28 +56,28 @@ let touchEndX = 0;
 
 // ── Content ──
 const slides = [
-  { src: "images/img1.jpeg", caption: "The day we met" },
-  { src: "images/img2.jpeg", caption: "Our first adventure" },
-  { src: "images/img3.jpeg", caption: "When you smiled at me" },
-  { src: "images/img4.jpeg", caption: "My favorite moment" },
-  { src: "images/img5.jpeg", caption: "You make everything better" }
+  { src: "images/img1.jpeg", caption: "The day I made up mind (again)" },
+  { src: "images/img2.jpeg", caption: "The beginning of our route" },
+  { src: "images/img3.jpeg", caption: "V.Bad girl of V.Good Sensei" },
+  { src: "images/img4.jpeg", caption: "Well we alr know you're a gift" },
+  { src: "images/img5.jpeg", caption: "This day has special place in my heart" }
 ];
 
-const happyLetterContent = `You are my safe place, my biggest joy, and the best gift ever given to me. There's a lot I wanna say but ik you won't read it (lol) so keeping it short.. I just wanna thank you for always taking care of me and make me feel loved.. and specailly safe (so safe that I don't have to hold back my tears in front of u). You have no idea how positively You've chnaged me as a person. And I've litrally started loving everything after u made me see the world through your eyes. I am always gonna be your biggest supporter and I WILL make sure u never feel alone or unseen at any point of your life. I will always stand by your side and do my best to help u make your dreams come true (no matter how silly they might seem to u). As long as I'm alive u never have to worry about fighting any battle alone.. And even after I'm dead my Duas will always be by your side.. (these are not just words.. I'll make sure u feel their presence like u feel the wind. (Your Dua will always be with you!❤️))  `.trim();
+const happyLetterContent = `You are my safe place, my biggest joy, and the best gift ever given to me.🎀 There's a lot I wanna say but ik you won't read it😶 so keeping it short.. I just wanna thank you for always taking care of me and make me feel loved.. and specailly safe (so safe that I don't have to hold back my tears in front of u). You have no idea how positively You've chnaged me as a person. And I've litrally started loving everything after u made me see the world through your eyes. I am always gonna be your biggest supporter and I WILL make sure u never feel alone or unseen at any point of your life💗. I will always stand by your side and do my best to help u make your dreams come true (no matter how silly they might seem to u). As long as I'm alive.. u never have to worry about fighting any battle alone.. And even after I'm dead my Duas will always be by your side.. (these are not just words.. I'll make sure u feel their presence like u feel the wind. (Your Dua will always be with you!❤️))  `.trim();
 
-const sadLetterContent = `Okay... Guess I went too far with my delusions💔 But just so you know My love for u doesn't come with conditions (not even of u loving me back) I will still be your biggest supporter and keep my arms open to hold u and all your worries at any point of your life (and I mean it!) If u ever feel alone.. just remember your Dua is always looking out for you and trying to make sure that if she can't reach her Sensei.. her Duas will!`.trim();
+const sadLetterContent = `Okay... Guess I went too far with my delusions💔 But just so you know My love for u doesn't come with conditions (not even of u loving me back) I will still be your biggest supporter and keep my arms open to hold u and all your worries at any point of your life (and I mean it!) If u ever feel alone.. just remember your Dua is always looking out for you and trying to make sure that if she can't reach her Sensei.. her Duas will! 🖤`.trim();
 
 const maybeMessages = [
-  "I knew you'd pick this",
+  "I knew you'd pick this 😶",
   "You sure about that? 🤨",
-  "Guess we're not joking anymore huh…",
-  "Still maybe? 🥺",
-  "Okay… keep going if you're brave",
+  "Guess we're not joking anymore huh…😖",
+  "Still maybe? 🤨",
+  "Okay… keep going if you're brave 🥺",
   "Thkk",
-  "Wow you''re persistent (So am I tho)",
-  "Well a 'maybe' is better than a 'No'",
-  "Just one more and I might cry fr",
-  "Alr I guess this is it"
+  "Wow you're persistent (So am I tho😁)",
+  "Well a 'maybe' is better than a 'No'😖",
+  "Just one more and I might cry fr🥺",
+  "Alr I guess this is it💔"
 ];
 
 const quizQuestions = [
@@ -95,14 +95,14 @@ const quizQuestions = [
 
 const myAnswers = [
   { cat: "Animal", img: "images/1.jpeg", reason: "Goldfish; because You have a literal 10 sec memory :D" },
-  { cat: "Place", img: "images/2.jpeg", reason: "Where two oceans meet; because the sight has always been breathtaking for me.. and you have the perfect blend of spiritual and worldly sides. U dont let the two mix.. but compliment each" },
-  { cat: "Flower", img: "images/3.jpeg", reason: "Black Rose; because u have that elegant and royal beauty yet soft and pure once someone gets to know u from close." },
-  { cat: "Food", img: "images/4.jpeg", reason: "Sajji; because this has been my most favourite meal ever since I started going with you.. Never Imagined I would crave something every other day" },
-  { cat: "Character", img: "images/5.jpeg", reason: "Luffy; no explanation needed — You resemble Luffy so much.. Like from your smile to the way u carry the world around u.. You don't expect anything in return but genuinely wanna help everyone like luffy.. And just like he's too young but carries Big dreams.. Same goes for u.. You don't want the fame but a better world (And I have no doubt that you're gonna find your one piece IA)" },
-  { cat: "Hobby", img: "images/6.jpeg", reason: "photography; because u know I want to record u all the time.. I wanna see you smile again and again." },
-  { cat: "Colour", img: "images/7.jpeg", reason: "Golden; because you litrally shine!! No exageration but I can feel the brightness that your presence brings into my life." },
-  { cat: "Season", img: "images/8.jpeg", reason: "Rain; because u love rain... and I love u even more when u smile and feel happy suddenly everytime it rains.." },
-  { cat: "Drink", img: "images/9.jpeg", reason: "Khoya Khajoor shake; just because it feels so tasty and our route is kinda incomplete without it." }
+  { cat: "Place", img: "images/2.jpeg", reason: "Where two oceans meet; because the sight has always been breathtaking for me.. and you have the perfect blend of spiritual and worldly sides.💞 U dont let the two mix.. but compliment each" },
+  { cat: "Flower", img: "images/3.jpeg", reason: "Black Rose; because u have that elegant and royal beauty yet soft and pure once someone gets to know u from close.🖤" },
+  { cat: "Food", img: "images/4.jpeg", reason: "Sajji; because this has been my most favourite meal ever since I started going with you.. Never Imagined I would crave something every other day💖" },
+  { cat: "Character", img: "images/5.jpeg", reason: "Luffy; no explanation needed — You resemble Luffy so much.. Like from your smile to the way u carry the world around u.. You don't expect anything in return but genuinely wanna help everyone like luffy.. And just like he's too young but carries Big dreams.. Same goes for u.. You don't want the fame but a better world (And I have no doubt that you're gonna find your one piece IA❣️)" },
+  { cat: "Hobby", img: "images/6.jpeg", reason: "photography; because u know I want to record u all the time.. I wanna see you smile again and again.💖" },
+  { cat: "Colour", img: "images/7.jpeg", reason: "Golden; because you litrally shine!! No exageration but I can feel the brightness that your presence brings into my life.💝" },
+  { cat: "Season", img: "images/8.jpeg", reason: "Rain; because u love rain... and I love u even more when u smile and feel happy suddenly everytime it rains..💕" },
+  { cat: "Drink", img: "images/9.jpeg", reason: "Khoya Khajoor shake; just because it feels so tasty and our route is kinda incomplete without it.🤭" }
 ];
 
 // ── Helpers ──
@@ -211,7 +211,7 @@ function updateMedia() {
   } else {
     slideImg.classList.add("hidden");
     video.style.display = "block";
-    captionEl.textContent = "A special message for you... ❤️";
+    captionEl.textContent = "I wanna see this smile of yours for the rest of my life... ❤️";
     video.play();
     document.querySelector(".media-nav").style.display = "none";
   }
