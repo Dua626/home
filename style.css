@@ -216,7 +216,7 @@ button:active { transform: scale(0.95); }
   font-weight: bold;
 }
 
-/* Letters */
+/* Letters (Premium Typewriter Style) - Used for Happy, Sad, and Final Reveal */
 .letter-content {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(5px);
@@ -301,9 +301,9 @@ button:active { transform: scale(0.95); }
   line-height: 1.2;
 }
 
-/* 2. Category & Final: Centered (Standard) */
-#revealCategory, #revealFinal {
-  justify-content: center; /* Back to Center */
+/* 2. Category Reveal: Centered (Standard) */
+#revealCategory {
+  justify-content: center;
   padding-top: 1.5rem;
 }
 
@@ -362,31 +362,41 @@ button:active { transform: scale(0.95); }
   width: auto;
   padding: 0;
 }
-/* --- FINAL REVEAL SPECIAL STYLES --- */
 
-/* 1. Change H1 Font to be readable & emotional */
-#revealFinal h1 {
-  font-family: 'Poppins', sans-serif; /* Clean font instead of Cursive */
-  font-size: 1.1rem;                  /* Paragraph size */
-  font-weight: 400;
-  font-style: italic;                 /* Italic for "love letter" feel */
-  line-height: 1.8;                   /* More space between lines */
+/* --- FINAL REVEAL SPECIAL STYLES (Letter Layout) --- */
+
+#revealFinal {
+  justify-content: center;
+  padding-top: 1.5rem;
+}
+
+/* 1. Force the final message to look like the letter text */
+#revealFinal .letter-text {
+  font-family: 'Courier New', Courier, monospace; /* Typewriter font */
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: left;
+  color: #444;
+  margin: 0 0 2rem 0; /* Adjust margin */
+  padding: 1rem;
+  border-left: 3px solid #e91e63;
+  font-weight: normal; /* Remove any H1 bolding */
+  font-style: normal;
   text-transform: none;
-  margin-bottom: 2.5rem;
-  padding: 0 1rem;
 }
 
 /* 2. Change Buttons to Pink Text (Inverted Style) */
 #revealFinal button {
-  background: white;          /* White background */
-  color: #e91e63;             /* Pink text */
-  border: 2px solid #e91e63;  /* Pink border */
+  background: white !important;       /* Force White background */
+  color: #e91e63 !important;          /* Force Pink text */
+  border: 2px solid #e91e63 !important; /* Force Pink border */
   font-weight: 600;
+  box-shadow: none !important;        /* Remove default shadow if any */
 }
 
-/* Optional: Hover effect for these specific buttons */
+/* Hover effect */
 #revealFinal button:hover {
-  background: #fce4ec;        /* Very light pink on hover */
+  background: #fce4ec !important;     /* Very light pink */
   transform: scale(1.05);
 }
 
