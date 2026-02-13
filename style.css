@@ -400,6 +400,16 @@ button:active { transform: scale(0.95); }
   transform: scale(1.05);
 }
 
+/* Add this at the end of style.css */
+.end-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* This forces space between the buttons */
+  width: 100%;
+  align-items: center;
+  margin-top: 20px;
+}
+
 @media (max-width: 768px) {
   .media-nav button {
     background: rgba(0, 0, 0, 0.15);
