@@ -6,21 +6,22 @@ body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #fff0f6, #ffebee);
   color: #333;
-  height: 100vh; /* Fixed height to prevent mobile scroll bounce */
+  height: 100vh;
   width: 100vw;
   overflow: hidden;
 }
 
+/* Default Screen Behavior (Centered) */
 .screen {
   position: absolute;
   inset: 0;
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Perfect vertical centering */
+  justify-content: center; /* Default: Center */
   text-align: center;
   padding: 1.5rem;
-  overflow-y: auto; /* Allow internal scrolling if content is long */
+  overflow-y: auto;
 }
 
 .screen.active { 
@@ -51,10 +52,29 @@ h1 {
   line-height: 1.2;
 }
 
+/* --- TEXT UPDATES --- */
+
+/* Fix for "Right Answer" color - Forced Pink */
+.correct-ans {
+  color: #e91e63 !important; 
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Fix for "Do you love me" subtext */
+#question .content p {
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #e91e63;
+  margin-bottom: 0.2rem;
+  opacity: 0.9;
+}
+
 /* Buttons Container */
 .buttons {
   display: flex;
-  flex-direction: column; /* Mobile first: stacked vertically */
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
   width: 100%;
@@ -63,7 +83,7 @@ h1 {
 
 @media (min-width: 768px) {
   .buttons {
-    flex-direction: row; /* Desktop: horizontal row */
+    flex-direction: row;
     justify-content: center;
     gap: 2rem;
   }
@@ -87,19 +107,6 @@ button {
   box-shadow: 0 8px 25px rgba(233,30,99,0.3); 
 }
 
-#question .content p {
-  font-family: 'Poppins', sans-serif; /* Keeps it readable */
-  font-style: italic;                 /* Adds the "whisper" feel */
-  font-size: 1.1rem;
-  color: #e91e63;                     /* Matches the theme pink */
-  margin-bottom: 0.2rem;              /* Pulls it closer to the main question */
-  opacity: 0.9;
-}
-
-.correct-ans {
-  color: #e91e63;  /* Matches the buttons and hearts */
-}
-
 #maybeBtn { background: #78909c; color: white; z-index: 100; }
 #noBtn { background: #757575; color: white; }
 
@@ -121,7 +128,6 @@ button:active { transform: scale(0.95); }
   display: inline-block;
 }
 
-/* Broken heart stages logic */
 .main-heart.broken-1 { transform: scale(0.9); }
 .main-heart.broken-10 {
   transform: scale(0.3) rotate(15deg);
@@ -139,7 +145,7 @@ button:active { transform: scale(0.95); }
 }
 .maybe-feedback.visible { opacity: 1; }
 
-/* ─── Unified Media Container (Memories) ─── */
+/* Unified Media Container */
 .unified-container {
   width: 100%;
   max-width: 320px;
@@ -167,10 +173,8 @@ button:active { transform: scale(0.95); }
 }
 
 #memoryVideo { display: none; }
-
 .hidden { opacity: 0; pointer-events: none; }
 
-/* Navigation Arrows inside media frame */
 .media-nav {
   position: absolute;
   top: 50%;
@@ -179,7 +183,7 @@ button:active { transform: scale(0.95); }
   justify-content: space-between;
   transform: translateY(-50%);
   z-index: 10;
-  pointer-events: none; /* Allows clicks to pass through to image if needed */
+  pointer-events: none;
   padding: 0 10px;
 }
 
@@ -191,7 +195,7 @@ button:active { transform: scale(0.95); }
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
-  pointer-events: auto; /* Re-enable clicks for buttons */
+  pointer-events: auto;
   box-shadow: none;
   display: flex;
   align-items: center;
@@ -201,11 +205,8 @@ button:active { transform: scale(0.95); }
   transition: background 0.3s;
 }
 
-.media-nav button:hover {
-  background: rgba(233, 30, 99, 0.8);
-}
+.media-nav button:hover { background: rgba(233, 30, 99, 0.8); }
 
-/* Caption styling */
 .caption {
   margin-top: 15px;
   font-family: 'Courier New', Courier, monospace;
@@ -215,7 +216,7 @@ button:active { transform: scale(0.95); }
   font-weight: bold;
 }
 
-/* Letters (Premium Typewriter Style) */
+/* Letters */
 .letter-content {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(5px);
@@ -226,7 +227,7 @@ button:active { transform: scale(0.95); }
 
 .letter-text, .cat-reason {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.9rem; /* Smaller as requested */
+  font-size: 0.9rem;
   line-height: 1.6;
   text-align: left;
   white-space: pre-wrap;
@@ -236,7 +237,6 @@ button:active { transform: scale(0.95); }
   border-left: 3px solid #e91e63;
 }
 
-/* Floating Hearts */
 .hearts span {
   position: fixed;
   bottom: -50px;
@@ -244,11 +244,9 @@ button:active { transform: scale(0.95); }
   z-index: 1;
   animation: float linear forwards;
 }
-@keyframes float {
-  to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
-}
+@keyframes float { to { transform: translateY(-110vh) rotate(45deg); opacity: 0; } }
 
-/* Quiz & Progress */
+/* Quiz */
 .quiz-options { width: 100%; display: flex; flex-direction: column; gap: 0.8rem; }
 .quiz-options button {
   max-width: none;
@@ -260,10 +258,9 @@ button:active { transform: scale(0.95); }
 
 .score-big { font-size: 5rem; font-weight: 700; color: #e91e63; margin: 1rem 0; }
 
-/* ─── Quiz Review Section ─── */
 .quiz-review {
   width: 100%;
-  max-height: 25vh; /* Takes up a quarter of screen height */
+  max-height: 25vh;
   overflow-y: auto;
   background: rgba(255, 255, 255, 0.5);
   padding: 1rem;
@@ -280,34 +277,22 @@ button:active { transform: scale(0.95); }
   border-bottom: 1px solid rgba(233, 30, 99, 0.1);
 }
 
-.correct-ans {
-  color: #2ecc71;
-  font-weight: 600;
-  margin-top: 2px;
-}
+/* --- SPECIAL REVEAL PAGE STYLES --- */
 
-/* Reveal Page Styles */
-
-
-/* --- FIX FOR REVEAL PAGE SCROLLING --- */
-
-/* Force this specific page to start at the top, not center */
-#revealPage {
-  justify-content: flex-start !important;
-  padding-top: 80px; /* Space from top edge */
+/* 1. Intro Page: Top Aligned + Scrolling */
+#revealIntro {
+  justify-content: flex-start !important; /* Force Top Alignment */
+  padding-top: 80px;
   height: 100vh;
-  overflow-y: auto; /* Enable scrolling */
-  -webkit-overflow-scrolling: touch; /* Smooth scroll on mobile */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Ensure the content inside can scroll fully */
-#revealPage .content {
+#revealIntro .content {
   justify-content: flex-start;
-  max-width: 420px;
-  margin-bottom: 50px; /* Space at bottom for scrolling */
+  margin-bottom: 50px;
 }
 
-/* Styling for the "I just made u do this trend" text */
 .intro-note {
   font-family: 'Great Vibes', cursive;
   font-size: 2rem;
@@ -315,11 +300,21 @@ button:active { transform: scale(0.95); }
   margin-bottom: 1rem;
   line-height: 1.2;
 }
+
+/* 2. Category & Final: Centered (Standard) */
+#revealCategory, #revealFinal {
+  justify-content: center; /* Back to Center */
+  padding-top: 1.5rem;
+}
+
 .template-container {
-  position: relative;
-  width: 280px;
+  width: 100%;
+  max-width: 300px;
   aspect-ratio: 4 / 5;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 2rem auto;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border-radius: 20px;
 }
 
 .template-grid {
@@ -329,7 +324,7 @@ button:active { transform: scale(0.95); }
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
-  transition: opacity 1.5s ease; /* Smooth disappearing/appearing loop */
+  transition: opacity 1.5s ease;
 }
 
 .template-grid.hidden { opacity: 0; }
@@ -341,10 +336,9 @@ button:active { transform: scale(0.95); }
   margin-bottom: 2rem;
 }
 
-/* Category Reveal (Clean Separate Phase) */
 .cat-image-frame {
   width: 250px;
-  aspect-ratio: 1 / 1; /* 1:1 Ratio as requested */
+  aspect-ratio: 1 / 1;
   margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
@@ -369,14 +363,12 @@ button:active { transform: scale(0.95); }
   padding: 0;
 }
 
-/* Final Page */
 .final-reveal h1 { font-size: 1.8rem; margin-bottom: 3rem; }
 .end-buttons { display: flex; flex-direction: column; gap: 1rem; width: 100%; align-items: center; }
 
-/* Mobile Adjustments for Media Nav */
 @media (max-width: 768px) {
   .media-nav button {
-    background: rgba(0, 0, 0, 0.15); /* Subtler on mobile */
+    background: rgba(0, 0, 0, 0.15);
     width: 35px;
     height: 35px;
   }

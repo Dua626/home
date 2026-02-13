@@ -8,7 +8,10 @@ const screens = {
   sadLetter: document.getElementById("sadLetter"),
   quiz: document.getElementById("quiz"),
   score: document.getElementById("score"),
-  revealPage: document.getElementById("revealPage")
+  // New split sections
+  revealIntro: document.getElementById("revealIntro"),
+  revealCategory: document.getElementById("revealCategory"),
+  revealFinal: document.getElementById("revealFinal")
 };
 
 const bgMusic = document.getElementById("bgMusic");
@@ -34,14 +37,13 @@ const scoreNumber = document.getElementById("scoreNumber");
 const scoreTitle = document.getElementById("scoreTitle");
 const rememberBtn = document.getElementById("rememberBtn");
 const startRevealBtn = document.getElementById("startRevealBtn");
-const categoryReveal = document.getElementById("categoryReveal");
-const initialRevealView = document.getElementById("initialRevealView");
+
+// Category elements
 const catTitle = document.getElementById("catTitle");
 const catImage = document.getElementById("catImage");
 const catReason = document.getElementById("catReason");
 const prevCatBtn = document.getElementById("prevCatBtn");
 const nextCatBtn = document.getElementById("nextCatBtn");
-const finalReveal = document.getElementById("finalReveal");
 
 // Grid alternating elements
 const grid1 = document.getElementById("grid1");
@@ -148,7 +150,7 @@ let maybeCount = 0;
 const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 function moveMaybeButton() {
-  if (isMobile) return; // Stays fixed on mobile
+  if (isMobile) return; 
   const x = Math.random() * (window.innerWidth - maybeBtn.offsetWidth - 40) + 20;
   const y = Math.random() * (window.innerHeight - maybeBtn.offsetHeight - 40) + 20;
   maybeBtn.style.position = "fixed";
@@ -194,11 +196,10 @@ yesBtn.addEventListener("click", () => {
   updateMedia();
 });
 
-// ── Unified Memories Logic (Swipe + Arrows) ──
+// ── Unified Memories Logic ──
 let slideIndex = 0;
 
 function updateMedia() {
-  // Reset visibility
   slideImg.classList.remove("hidden");
   video.style.display = "none";
   video.pause();
@@ -206,22 +207,18 @@ function updateMedia() {
   if (slideIndex < slides.length) {
     slideImg.src = slides[slideIndex].src;
     captionEl.textContent = slides[slideIndex].caption;
-    // Ensure arrows are visible (except on video)
     document.querySelector(".media-nav").style.display = "flex";
   } else {
-    // Show video on the "last" index
     slideImg.classList.add("hidden");
     video.style.display = "block";
     captionEl.textContent = "A special message for you... ❤️";
     video.play();
-    // Hide arrows during video
     document.querySelector(".media-nav").style.display = "none";
   }
 }
 
-// Navigation Functions
 function handleNext() {
-  if (slideIndex <= slides.length - 1) { // Allows going to video index
+  if (slideIndex <= slides.length - 1) {
     slideIndex++;
     updateMedia();
   }
@@ -234,11 +231,9 @@ function handlePrev() {
   }
 }
 
-// Desktop Arrow Events
 document.getElementById("nextSlide").onclick = handleNext;
 document.getElementById("prevSlide").onclick = handlePrev;
 
-// Mobile Swipe Events
 if (mediaFrame) {
   mediaFrame.addEventListener('touchstart', e => {
       touchStartX = e.changedTouches[0].screenX;
@@ -252,12 +247,8 @@ if (mediaFrame) {
 
 function handleSwipe() {
     const swipeThreshold = 50;
-    if (touchEndX < touchStartX - swipeThreshold) {
-        handleNext(); // Swipe Left -> Next
-    }
-    if (touchEndX > touchStartX + swipeThreshold) {
-        handlePrev(); // Swipe Right -> Back
-    }
+    if (touchEndX < touchStartX - swipeThreshold) { handleNext(); }
+    if (touchEndX > touchStartX + swipeThreshold) { handlePrev(); }
 }
 
 startBtn.onclick = () => showScreen("question");
@@ -289,7 +280,6 @@ function showScoreScreen() {
   scoreNumber.textContent = percent + "%";
   scoreTitle.textContent = percent >= 80 ? "Wow Sensei! ❤️" : "Guess we gotta hangout more! 😉";
   
-  // Populate Quiz Review
   const reviewList = document.getElementById("reviewList");
   if (reviewList) {
     reviewList.innerHTML = "";
@@ -303,14 +293,15 @@ function showScoreScreen() {
       reviewList.appendChild(item);
     });
   }
-
   showScreen("score");
 }
 
-// ── Reveal Sequence ──
+// ── Reveal Sequence (Split Pages) ──
 let revealIdx = 0;
+
+// 1. Go to Intro Page
 rememberBtn.onclick = () => {
-  showScreen("revealPage");
+  showScreen("revealIntro"); // Shows the scrolling letter
   let t = true;
   setInterval(() => {
     grid1.classList.toggle("hidden", !t);
@@ -319,16 +310,19 @@ rememberBtn.onclick = () => {
   }, 2000);
 };
 
+// 2. Go to Category Page
 startRevealBtn.onclick = () => {
-  initialRevealView.classList.add("hidden");
-  categoryReveal.classList.remove("hidden");
+  showScreen("revealCategory"); // Shows the centered slider
   showCat();
 };
 
+// 3. Navigate Categories & Go to Final
 nextCatBtn.onclick = () => {
   revealIdx++;
   if (revealIdx < myAnswers.length) showCat();
-  else { categoryReveal.classList.add("hidden"); finalReveal.classList.remove("hidden"); }
+  else { 
+    showScreen("revealFinal"); // Shows the final message
+  }
 };
 
 prevCatBtn.onclick = () => { if (revealIdx > 0) { revealIdx--; showCat(); } };
